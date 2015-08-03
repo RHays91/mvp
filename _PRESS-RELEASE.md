@@ -1,4 +1,4 @@
-# Project Name #
+# AuralLandscape #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -17,28 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  AuralLandscape
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+  Dynamic in-browser music companion for the vision-seeking listener. 
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  AuralLandscape breathes new life into the audio-visualizer world with its revolutionary context-aware engine. Breaking away from the monotonous realm of previous options, the listening experience can now be fully enhanced by a dynamic scene that responds to beat, frequency, mood and user input. As your taste and mood change throughout the day, sit back and watch the view naturally adapt or take a more active role and directly influence the visuals before you.
+
 
 ## Problem ##
-  > Describe the problem your product solves.
+  Too often music visualizers promise to complete the listening experience only to deliver a product that quickly grows dull and uninspiring, failing to enhance emotion or respond to context.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  AuralLandscape augments the listening experience with much needed diversity. Elements of the graphic panorama respond to different aspects of the current song, reinforcing the sound and feel of the music you know and love or a song you are listening to for the very first time.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  "I put on AuralLandscape whenever I need to get away for a minute or find an awesome new song. The journey through sound that follows is an indispensable part of my day." - Robby Hays, Founder + CEO
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  No downloads necessary! Simply follow the link and give AuralLandscape a song to get started.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  "Bored of the same old iTunes visualizer, I decided to give AuralLandscape a try. This is the product I've been waiting for- never looking back!" - Joe Schmo, 29, CA
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  Check out AuralLandscape for yourself! It's so awesome and easy, we promise you'll quickly find yourself pinning it to your bookmarks bar.
