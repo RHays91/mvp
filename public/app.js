@@ -1,10 +1,10 @@
 (function() {
 
   var bass = 2;
-  var mid = 1;
+  var mid = 7;
   var treb = 1;
 
-  var colours = ['#121A4A', '#397FE8', '#4CC3FF'];
+  var colours = ['#121A4A', 'rgba(76,195,255,0.8)', '#4CC3FF'];
   var trebNodes = [];
   var midNodes = [];
   var bassNodes = [];
@@ -45,20 +45,32 @@
 
     trebNodes.push(node);
   }
+
   // Append mid nodes
   for (var i = 0; i < mid; i++) {
-    var cx = '50%';
-    var cy = '55%';
+    // var cx = '50%';
+    var cy = 20+(10*i)+'%';
 
-    var node = env.append('circle')
-     .attr('class', 'node midNode')
-     .attr('cx', cx)
-     .attr('cy', cy)
-     .attr('r', 15)
+    var nodeL = env.append('rect')
+     .attr('class', 'node midNode midNodeL')
+     .attr('x', 0)
+     .attr('y', cy)
+     .attr('width', 20)
+     .attr('height', 8)
      .attr('fill', colours[1]);
 
-    midNodes.push(node);
+    var nodeR = env.append('rect')
+     .attr('class', 'node midNode midNodeR')
+     .attr('x', '100%')
+     .attr('y', cy)
+     .attr('width', 20)
+     .attr('height', 8)
+     .attr('fill', colours[1]);
+
+    midNodes.push(nodeL);
+    midNodes.push(nodeR);
   }
+
   // Append bass nodes
   for (var i = 0; i < bass; i++) {
     var cx = '0%';
@@ -74,8 +86,6 @@
      .attr('class', 'node bassNode'+' bass'+i)
      .attr('x', cx)
      .attr('y', cy)
-     .attr("x1", 0).attr("y1", "0%")
-     .attr("x2", 0).attr("y2", "100%")
      .attr('width', '100%')
      .attr('height', 25)
      .attr('fill', "rgba(18,26,74,1)");

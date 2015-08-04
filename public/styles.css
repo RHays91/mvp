@@ -47,6 +47,16 @@ VISUALS
   transform-origin: bottom center;
 }
 
+.midNodeR {
+  -webkit-transform-origin: right;
+  transform-origin: right;
+}
+
+.midNodeL {
+  -webkit-transform-origin: left;
+  transform-origin: left;
+}
+
 #envBounds {
   background: url("taurus1a.png") no-repeat center center fixed;
   background-size: cover;
