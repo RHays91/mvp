@@ -43,3 +43,20 @@ Once the project moves into development, the press release can be used as a touc
 
 ## Closing and Call to Action ##
   Check out AuralLandscape for yourself! It's so awesome and easy, we promise you'll quickly find yourself pinning it to your bookmarks bar.
+
+
+var calcmax = function( array ){
+    return Math.max.apply( Math, array );
+};
+ 
+var calcmin = function( array ){
+    return Math.min.apply( Math, array );
+};
+
+var calcavg = function(array){
+  var sum = 0;
+  for (var i = 0; i < array.length; i++){
+    sum += array[i];
+  }
+  return sum / array.length;
+};

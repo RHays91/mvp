@@ -37,8 +37,24 @@ VISUALS
   transform-origin: bottom center;
 }
 
+.bass0 {
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+}
+
+.bass1 {
+  -webkit-transform-origin: bottom center;
+  transform-origin: bottom center;
+}
+
 #envBounds {
   background: url("taurus1a.png") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+#envBounds2 {
+  background: url("taurus1b.png") no-repeat center center fixed;
   background-size: cover;
   height: 100%;
   width: 100%;
