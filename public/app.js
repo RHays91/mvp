@@ -14,7 +14,7 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext;
 
 var analyser = context.createAnalyser();
-analyser.fftSize = 256;
+analyser.fftSize = 2048;
 
 var stream = document.querySelector('#audio');
 
@@ -70,7 +70,16 @@ for (var i = 0; i < bass; i++) {
    .attr('y', cy)
    .attr('width', 500)
    .attr('height', 20)
-   .attr('fill', colours[0]);
+   .attr('fill', "rgba(18,26,74,0.9)");
+
+  //  var gradient = svg.append("svg:defs")
+  // .append("svg:linearGradient")
+  //   .attr("id", "gradient")
+  //   .attr("x1", "0%")
+  //   .attr("y1", "0%")
+  //   .attr("x2", "100%")
+  //   .attr("y2", "100%")
+  //   .attr("spreadMethod", "pad");
 
   bassNodes.push(node);
 }
@@ -91,72 +100,40 @@ var pulse = function() {
     return freqDomain[index];
   };
 
-  // set up helper functions to analyze bass/mid/treb average signal strength
-  // @ given moment in time
+  // set up helper functions to analyze average signal strength
+  // for a frequency range @ given moment in time
     // when these averages exceed threshold for a range --> trigger animation
-  var bassAnalysis = function(){
-    var min = 0; //0 Hz
-    var max = 320; //320 Hz
-    var step = (max - min) / 20;
+  var rangeSignalAnalyzer = function(min, max, samples){
+    var min = min;
+    var max = max;
+    var step = (max-min)/samples;
 
     var sum = 0;
     for (var i = min; i < max; i += step){
       sum += getFreqVal(i);
     }
-    // barray.push(sum / 20);
-    return sum / 20;
+    return sum / samples;
   };
 
-  var midAnalysis = function(){
-    var min = 320; //320 Hz
-    var max = 1280; //1280 Hz
-    var step = (max - min) / 60;
-
-    var sum = 0;
-    for (var i = min; i < max; i += step){
-      sum += getFreqVal(i);
-    }
-    // marray.push(sum / 60);
-    return sum / 60;
-  };
-
-  var trebAnalysis = function(){
-    var min = 1280; //0 Hz
-    var max = 20840; //20840 Hz
-    var step = (max - min) / 1220;
-
-    var sum = 0;
-    for (var i = min; i < max; i += step){
-      sum += getFreqVal(i);
-    }
-    // tarray.push(sum / 1220);
-    return sum / 1220;
-  };
-
-  // console.log(
-  //   bassAnalysis(),
-  //   midAnalysis(),
-  //   trebAnalysis()
-  //   );
-  if (trebAnalysis() > -70.31){
+  if (rangeSignalAnalyzer(1280,20840,1220) > -70.31){
     env.selectAll('.trebNode')
       .data(freqDomain)
       .style('transform', function(d) {
         return 'scale(' + Math.abs(d)/10 + ')';
     });
   }
-  if (midAnalysis() > -44.17){
+  if (rangeSignalAnalyzer(320,1280,60) > -44.17){
     env.selectAll('.midNode')
     .data(freqDomain)
     .style('transform', function(d) {
-      return 'scale(' + Math.abs(d)/20 + ')';
+      return 'scale(' + Math.abs(d)/10 + ')';
     });
   }
-  if (bassAnalysis() > -32.06){
+  if (rangeSignalAnalyzer(0,320,20) > -32.06){
     env.selectAll('.bassNode')
     .data(freqDomain)
     .style('transform', function(d) {
-      return 'scale(' + Math.abs(d)/40 + ')';
+      return 'scale(' + Math.abs(d)/10 + ')';
     });
   }
 };
