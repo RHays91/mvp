@@ -23,6 +23,7 @@ body {
 
 body {
   min-width: 480px;
+  /*background: url("taurus1a.png")  no-repeat;*/
   background-color: #fff;
   line-height: 1.5;
 }
@@ -34,4 +35,11 @@ VISUALS
   position: absolute;
   -webkit-transform-origin: bottom center;
   transform-origin: bottom center;
+}
+
+#envBounds {
+  background: url("taurus1a.png") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
 }

@@ -14,7 +14,7 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext;
 
 var analyser = context.createAnalyser();
-analyser.fftSize = 2048;
+analyser.fftSize = 256;
 
 var stream = document.querySelector('#audio');
 
@@ -100,8 +100,8 @@ var pulse = function() {
     return freqDomain[index];
   };
 
-  // set up helper functions to analyze average signal strength
-  // for a frequency range @ given moment in time
+  // set up helper functions to analyze bass/mid/treb average signal strength
+  // @ given moment in time
     // when these averages exceed threshold for a range --> trigger animation
   var rangeSignalAnalyzer = function(min, max, samples){
     var min = min;
@@ -115,6 +115,51 @@ var pulse = function() {
     return sum / samples;
   };
 
+
+  // var bassAnalysis = function(){
+  //   var min = 0; //0 Hz
+  //   var max = 320; //320 Hz
+  //   var step = (max - min) / 20;
+
+  //   var sum = 0;
+  //   for (var i = min; i < max; i += step){
+  //     sum += getFreqVal(i);
+  //   }
+  //   // barray.push(sum / 20);
+  //   return sum / 20;
+  // };
+
+  // var midAnalysis = function(){
+  //   var min = 320; //320 Hz
+  //   var max = 1280; //1280 Hz
+  //   var step = (max - min) / 60;
+
+  //   var sum = 0;
+  //   for (var i = min; i < max; i += step){
+  //     sum += getFreqVal(i);
+  //   }
+  //   // marray.push(sum / 60);
+  //   return sum / 60;
+  // };
+
+  // var trebAnalysis = function(){
+  //   var min = 1280; //0 Hz
+  //   var max = 20840; //20840 Hz
+  //   var step = (max - min) / 1220;
+
+  //   var sum = 0;
+  //   for (var i = min; i < max; i += step){
+  //     sum += getFreqVal(i);
+  //   }
+  //   // tarray.push(sum / 1220);
+  //   return sum / 1220;
+  // };
+
+  // console.log(
+  //   bassAnalysis(),
+  //   midAnalysis(),
+  //   trebAnalysis()
+  //   );
   if (rangeSignalAnalyzer(1280,20840,1220) > -70.31){
     env.selectAll('.trebNode')
       .data(freqDomain)
