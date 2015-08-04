@@ -2,9 +2,9 @@
 
   var bass = 2;
   var mid = 7;
-  var treb = 1;
+  var treb = 3;
 
-  var colours = ['#121A4A', 'rgba(76,195,255,0.8)', '#4CC3FF'];
+  var colors = ['#121A2E', '#8ED0EB', '#A3FFA4'];
   var trebNodes = [];
   var midNodes = [];
   var bassNodes = [];
@@ -17,8 +17,6 @@
   analyser.fftSize = 256;
 
   var stream = document.querySelector('#audio');
-
-  // var freqDomain = new Float32Array(analyser.frequencyBinCount);
 
   // Play stream and start basic pulse visuals
   stream.addEventListener('canplay', function() {
@@ -33,17 +31,30 @@
   var env = d3.select('#envBounds');
   // Append treb nodes
   for (var i = 0; i < treb; i++) {
-    var cx = '50%';
-    var cy = '20%';
+    var cxl = 30-(5*i)+'%';
+    var cxr = 70+(5*i)+'%'
+    var ry = (7-i)+'%';
+    // var cy = 75-(3*i)+'%';
+    var cy = '50%';
 
-    var node = env.append('circle')
-     .attr('class', 'node trebNode')
-     .attr('cx', cx)
+    var nodeL = env.append('ellipse')
+     .attr('class', 'node trebNode trebNodeL')
+     .attr('cx', cxl)
      .attr('cy', cy)
-     .attr('r', 5)
-     .attr('fill', colours[2]);
+     .attr('rx', 4)
+     .attr('ry', ry)
+     .attr('fill', colors[2]);
 
-    trebNodes.push(node);
+    var nodeR = env.append('ellipse')
+     .attr('class', 'node trebNode trebNodeR')
+     .attr('cx', cxr)
+     .attr('cy', cy)
+     .attr('rx', 4)
+     .attr('ry', ry)
+     .attr('fill', colors[2]);
+
+    trebNodes.push(nodeL);
+    trebNodes.push(nodeR);
   }
 
   // Append mid nodes
@@ -57,7 +68,7 @@
      .attr('y', cy)
      .attr('width', 20)
      .attr('height', 8)
-     .attr('fill', colours[1]);
+     .attr('fill', colors[1]);
 
     var nodeR = env.append('rect')
      .attr('class', 'node midNode midNodeR')
@@ -65,7 +76,7 @@
      .attr('y', cy)
      .attr('width', 20)
      .attr('height', 8)
-     .attr('fill', colours[1]);
+     .attr('fill', colors[1]);
 
     midNodes.push(nodeL);
     midNodes.push(nodeR);
@@ -88,22 +99,23 @@
      .attr('y', cy)
      .attr('width', '100%')
      .attr('height', 25)
-     .attr('fill', "rgba(18,26,74,1)");
+     .attr('fill', colors[0])
+     .attr('opacity', 1.0);
 
-     node.append("linearGradient")
+     // node.append("linearGradient")
       // .attr("id", "temperature-gradient")
       // .attr("gradientUnits", "userSpaceOnUse")
-      .attr("x1", 0).attr("y1", "0%")
-      .attr("x2", 0).attr("y2", "100%")
-    .selectAll("stop")
-      .data([
-        {offset: "0%", color: "steelblue"},
-        {offset: "50%", color: "gray"},
-        {offset: "100%", color: "red"}
-      ])
-    .enter().append("stop")
-      .attr("offset", function(d) { return d.offset; })
-      .attr("stop-color", function(d) { return d.color; });
+    //   .attr("x1", 0).attr("y1", "0%")
+    //   .attr("x2", 0).attr("y2", "100%")
+    // .selectAll("stop")
+    //   .data([
+    //     {offset: "0%", color: "steelblue"},
+    //     {offset: "50%", color: "gray"},
+    //     {offset: "100%", color: "red"}
+    //   ])
+    // .enter().append("stop")
+    //   .attr("offset", function(d) { return d.offset; })
+    //   .attr("stop-color", function(d) { return d.color; });
 
     bassNodes.push(node);
   }
@@ -139,11 +151,11 @@
       return sum / samples;
     };
 
-    if (rangeSignalAnalyzer(1280,20840,1220) > -78.31){
+    if (rangeSignalAnalyzer(1280,20840,1220) > -88.31){
       env.selectAll('.trebNode')
         .data(freqDomain)
         .style('transform', function(d) {
-          return 'scale(' + Math.abs(d)/10 + ')';
+          return 'scale(' + Math.abs(d)/15 + ')';
       });
     }
     if (rangeSignalAnalyzer(320,1280,60) > -44.17){
