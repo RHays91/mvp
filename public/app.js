@@ -4,7 +4,7 @@
   var mid = 7;
   var treb = 3;
 
-  var colors = ['#121A2E', '#8ED0EB', '#A3FFA4'];
+  var colors = ['#121A2E', '#8ED0EB', '#5EAAD4'];
   var trebNodes = [];
   var midNodes = [];
   var bassNodes = [];
@@ -167,6 +167,7 @@
       return sum / samples;
     };
 
+    // Treble Visualization
     if (rangeSignalAnalyzer(1280,20840,1220) > -88.31){
       env.selectAll('.trebNode')
         .data(freqDomain)
@@ -174,13 +175,28 @@
           return 'scale(' + Math.abs(d)/15 + ')';
       });
     }
-    if (rangeSignalAnalyzer(420,1280,60) > -40.17){
+
+    // Mid Visualization
+    // Peak Signal Flourish
+    if (rangeSignalAnalyzer(420,1280,60) > -33.40){
       env.selectAll('.midNode')
       .data(freqDomain)
+      .transition().duration(function(d){return d*10})
+      .attr('fill', '#A3FFA4')
+      .style('transform', function(d) {
+        return 'scale(' + Math.abs(d)/10 + ')';
+      });
+    } else if (rangeSignalAnalyzer(420,1280,60) > -40.17){
+      env.selectAll('.midNode')
+      .data(freqDomain)
+      .transition().duration(function(d){return d*10})
+      .attr('fill', colors[1])
       .style('transform', function(d) {
         return 'scale(' + Math.abs(d)/10 + ')';
       });
     }
+
+    // Bass Visualization
     if (rangeSignalAnalyzer(0,320,20) > -28.06){
       env.selectAll('.bassNode')
       .data(freqDomain)
@@ -189,6 +205,7 @@
       });
     }
 
+    // Sub-bass Visualization (TODO, image too big/ jquery can't handle switch atm)
     // if (rangeSignalAnalyzer(0,20,20) > -20.00){
     //   $('#envBounds').toggleId('#envBounds2');
     //   // var bg = document.getElementById('envBounds');
