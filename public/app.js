@@ -19,16 +19,35 @@
   var stream = document.querySelector('#audio');
 
   // Play stream and start basic pulse visuals
-  stream.addEventListener('canplay', function() {
-    var source = context.createMediaElementSource(stream);
+  var source = context.createMediaElementSource(stream);
+  var begin = function(){ 
+    // stream.addEventListener('canplay', function() {
     source.connect(analyser);
     analyser.connect(context.destination);
     stream.play();
     d3.timer(pulse);
-  });
+    // });
+  };
+  var pause = function(){
+    stream.pause();
+  };
+
+  // begin and pause functionality
+  d3.select('body')
+    .on('keydown', begin);
+  d3.select('body')
+    .on('keypress.shiftKey', pause);
 
 
   var env = d3.select('#envBounds');
+
+  env.append('circle')
+    .attr('id', 'play')
+    .attr('cx', '50%')
+    .attr('cy', '50%')
+    .attr('r', '15%')
+    .attr('fill', 'ccc')
+    .attr('opacity', 0);
   // Append treb nodes
   for (var i = 0; i < treb; i++) {
     var cxl = 30-(5*i)+'%';
@@ -89,7 +108,7 @@
     if(i === 0){
       cy = '-25px';
     } else {
-      cy = i*100 + '%';
+      cy = '100%';
     }
 
 
@@ -98,24 +117,21 @@
      .attr('x', cx)
      .attr('y', cy)
      .attr('width', '100%')
-     .attr('height', 25)
+     .attr('height', 15)
      .attr('fill', colors[0])
-     .attr('opacity', 1.0);
 
-     // node.append("linearGradient")
-      // .attr("id", "temperature-gradient")
-      // .attr("gradientUnits", "userSpaceOnUse")
-    //   .attr("x1", 0).attr("y1", "0%")
-    //   .attr("x2", 0).attr("y2", "100%")
-    // .selectAll("stop")
-    //   .data([
-    //     {offset: "0%", color: "steelblue"},
-    //     {offset: "50%", color: "gray"},
-    //     {offset: "100%", color: "red"}
-    //   ])
-    // .enter().append("stop")
-    //   .attr("offset", function(d) { return d.offset; })
-    //   .attr("stop-color", function(d) { return d.color; });
+     node.append("linearGradient")
+      .attr("x1", 0).attr("y1", "0%")
+      .attr("x2", 0).attr("y2", "100%")
+    .selectAll("stop")
+      .data([
+        {offset: "0%", color: colors[0]},
+        {offset: "50%", color: colors[1]},
+        {offset: "100%", color: "#fff"}
+      ])
+    .enter().append("stop")
+      .attr("offset", function(d) { return d.offset; })
+      .attr("stop-color", function(d) { return d.color; });
 
     bassNodes.push(node);
   }
@@ -158,7 +174,7 @@
           return 'scale(' + Math.abs(d)/15 + ')';
       });
     }
-    if (rangeSignalAnalyzer(320,1280,60) > -44.17){
+    if (rangeSignalAnalyzer(420,1280,60) > -40.17){
       env.selectAll('.midNode')
       .data(freqDomain)
       .style('transform', function(d) {
@@ -169,7 +185,7 @@
       env.selectAll('.bassNode')
       .data(freqDomain)
       .style('transform', function(d) {
-        return 'scale(' + Math.abs(d)/8 + ')';
+        return 'scale(' + Math.abs(d)/6 + ')';
       });
     }
 
