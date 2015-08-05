@@ -41,6 +41,7 @@
 
   var env = d3.select('#envBounds');
 
+  // potential future play pause/track info feature, invisible for now
   env.append('circle')
     .attr('id', 'play')
     .attr('cx', '50%')
@@ -48,10 +49,12 @@
     .attr('r', '15%')
     .attr('fill', 'ccc')
     .attr('opacity', 0);
+
+
   // Append treb nodes
   for (var i = 0; i < treb; i++) {
-    var cxl = 30-(5*i)+'%';
-    var cxr = 70+(5*i)+'%'
+    var cxl = 27-(5*i)+'%';
+    var cxr = 73+(5*i)+'%'
     var ry = (7-i)+'%';
     // var cy = 75-(3*i)+'%';
     var cy = '50%';
@@ -168,9 +171,19 @@
     };
 
     // Treble Visualization
-    if (rangeSignalAnalyzer(1280,20840,1220) > -88.31){
+    if (rangeSignalAnalyzer(1280,20840,1220) > -60.50){
       env.selectAll('.trebNode')
         .data(freqDomain)
+        .transition().duration(function(d){return d*100})
+        .attr('fill', '#A3FFA4')
+        .style('transform', function(d) {
+          return 'scale(' + Math.abs(d)/15 + ')';
+      });
+    } else if (rangeSignalAnalyzer(1280,20840,1220) > -88.31){
+      env.selectAll('.trebNode')
+        .data(freqDomain)
+        .transition().duration(function(d){return d*100})
+        .attr('fill', colors[2])
         .style('transform', function(d) {
           return 'scale(' + Math.abs(d)/15 + ')';
       });
@@ -178,18 +191,18 @@
 
     // Mid Visualization
     // Peak Signal Flourish
-    if (rangeSignalAnalyzer(420,1280,60) > -33.40){
+    if (rangeSignalAnalyzer(420,1280,60) > -34.90){
       env.selectAll('.midNode')
       .data(freqDomain)
-      .transition().duration(function(d){return d*10})
+      .transition().duration(function(d){return d*300})
       .attr('fill', '#A3FFA4')
       .style('transform', function(d) {
-        return 'scale(' + Math.abs(d)/10 + ')';
+        return 'scale(' + Math.abs(d)/6 + ')';
       });
     } else if (rangeSignalAnalyzer(420,1280,60) > -40.17){
       env.selectAll('.midNode')
       .data(freqDomain)
-      .transition().duration(function(d){return d*10})
+      .transition().duration(function(d){return d*300})
       .attr('fill', colors[1])
       .style('transform', function(d) {
         return 'scale(' + Math.abs(d)/10 + ')';
@@ -201,7 +214,7 @@
       env.selectAll('.bassNode')
       .data(freqDomain)
       .style('transform', function(d) {
-        return 'scale(' + Math.abs(d)/6 + ')';
+        return 'scale(' + Math.abs(d)/5 + ')';
       });
     }
 
