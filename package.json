@@ -16,6 +16,7 @@
     "express-partials": "~0.2.0",
     "express-session": "^1.7.2",
     "jquery": "^2.1.4",
+    "mongoose": "^4.1.10",
     "morgan": "^1.6.1",
     "nodemon": "^1.2.1",
     "passport": "^0.3.0",
