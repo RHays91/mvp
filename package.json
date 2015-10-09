@@ -17,7 +17,9 @@
     "express-session": "^1.7.2",
     "jquery": "^2.1.4",
     "nodemon": "^1.2.1",
+    "passport-soundcloud": "^0.1.2",
     "request": "^2.34.0",
+    "spotify-node-applescript": "^0.2.2",
     "web-audio-api": "^0.2.1"
   }
 }
