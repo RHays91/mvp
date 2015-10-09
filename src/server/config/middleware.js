@@ -23,7 +23,7 @@ module.exports = function (app, express) {
   app.use(passport.session());
 
   // files in /client/public/ will be served as static assets
-  app.use(express.static(__dirname + '/../public/'));
+  app.use(express.static(__dirname + '../public/'));
 
   // restricts access to protected resources when request is not authenticated via passport
   // and mobile user not present in request headers
@@ -37,8 +37,7 @@ module.exports = function (app, express) {
 
   app.use('/user', userRouter);
   
-  app.use('/songs/', isAuth, songRouter);
-  app.use('/songs/:songId/', isAuth, songRouter);
+  app.use('/songs', isAuth, songRouter);
 
   //use error handling methods from helpers
   app.use(helpers.errorLogger);
